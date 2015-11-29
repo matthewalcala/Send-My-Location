@@ -26,6 +26,10 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Application requires access to device&apos;s location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Application requires access to device&apos;s location always</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

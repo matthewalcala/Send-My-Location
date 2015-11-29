@@ -1,25 +1,133 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Send_My_Location" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hew-ET-BSa">
+                                <rect key="frame" x="-4" y="34" width="383" height="44"/>
+                                <animations/>
+                                <items>
+                                    <navigationItem title="Send My Location" id="aW6-8M-g45"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a message:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbT-Yo-FKB">
+                                <rect key="frame" x="16" y="206" width="122" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="fZ9-04-FFR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a picture from camera:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkO-GH-vad">
+                                <rect key="frame" x="16" y="305" width="209" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="209" id="oLN-lh-kzg"/>
+                                    <constraint firstAttribute="height" constant="21" id="vr8-Iu-vdM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(ie: At the concert, in parking lot, etc)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fge-wb-PSx">
+                                <rect key="frame" x="16" y="235" width="343" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipient phone or name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PR3-aZ-HOc">
+                                <rect key="frame" x="16" y="147" width="343" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a recipient:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qil-TR-Euf">
+                                <rect key="frame" x="16" y="118" width="137" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="dYX-Rm-0N5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKI-P2-i1n">
+                                <rect key="frame" x="16" y="329" width="59" height="51"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="59" id="5dT-hb-eeX"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="camera5.png"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bmk-Qf-hTi"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zuf-ra-s9E">
+                                <rect key="frame" x="75" y="329" width="204" height="243"/>
+                                <animations/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHJ-kB-Sfb">
+                                <rect key="frame" x="138" y="596" width="98" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Send Location"/>
+                                <connections>
+                                    <action selector="sendLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gDj-VN-2v3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qil-TR-Euf" firstAttribute="top" secondItem="hew-ET-BSa" secondAttribute="bottom" constant="40" id="7TQ-M2-cmz"/>
+                            <constraint firstItem="BKI-P2-i1n" firstAttribute="top" secondItem="pkO-GH-vad" secondAttribute="bottom" constant="3" id="9R7-5j-jRn"/>
+                            <constraint firstItem="Fge-wb-PSx" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="C03-Ch-Yuz"/>
+                            <constraint firstItem="Fge-wb-PSx" firstAttribute="top" secondItem="ZbT-Yo-FKB" secondAttribute="bottom" constant="8" symbolic="YES" id="IJR-1o-NRw"/>
+                            <constraint firstItem="ZbT-Yo-FKB" firstAttribute="top" secondItem="PR3-aZ-HOc" secondAttribute="bottom" constant="29" id="LDD-cg-DcA"/>
+                            <constraint firstItem="hew-ET-BSa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="14" id="LT8-nd-Z41"/>
+                            <constraint firstItem="pkO-GH-vad" firstAttribute="leading" secondItem="BKI-P2-i1n" secondAttribute="leading" id="Pb4-Wg-NNk"/>
+                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="leading" secondItem="ZbT-Yo-FKB" secondAttribute="leading" id="Q1H-bu-r3P"/>
+                            <constraint firstItem="ZbT-Yo-FKB" firstAttribute="leading" secondItem="Fge-wb-PSx" secondAttribute="leading" id="S8C-EW-Pnd"/>
+                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="top" secondItem="Qil-TR-Euf" secondAttribute="bottom" constant="8" symbolic="YES" id="W0S-BI-NQU"/>
+                            <constraint firstItem="pkO-GH-vad" firstAttribute="top" secondItem="Fge-wb-PSx" secondAttribute="bottom" constant="40" id="ZCs-sk-oRf"/>
+                            <constraint firstItem="ZbT-Yo-FKB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ZKw-DD-QDg"/>
+                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="centerX" secondItem="hew-ET-BSa" secondAttribute="centerX" id="dsH-eB-6g4"/>
+                            <constraint firstItem="JHJ-kB-Sfb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="4" id="eSi-rl-CMd"/>
+                            <constraint firstItem="hew-ET-BSa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="klC-2b-g2A"/>
+                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="trailing" secondItem="Fge-wb-PSx" secondAttribute="trailing" id="lqR-GP-zdb"/>
+                            <constraint firstItem="Fge-wb-PSx" firstAttribute="leading" secondItem="pkO-GH-vad" secondAttribute="leading" id="oKI-sL-nig"/>
+                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="leading" secondItem="Qil-TR-Euf" secondAttribute="leading" id="xBy-WY-Hm0"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="imageView" destination="zuf-ra-s9E" id="6Em-Mu-sBz"/>
+                        <outlet property="messageField" destination="Fge-wb-PSx" id="bw4-Qj-TFm"/>
+                        <outlet property="recipientsField" destination="PR3-aZ-HOc" id="Srz-ej-iz1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="444.5" y="434.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera5.png" width="56" height="51"/>
+    </resources>
 </document>
