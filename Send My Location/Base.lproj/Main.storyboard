@@ -68,17 +68,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKI-P2-i1n">
-                                <rect key="frame" x="16" y="329" width="59" height="51"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="59" id="5dT-hb-eeX"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="camera5.png"/>
-                                <connections>
-                                    <action selector="takePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bmk-Qf-hTi"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zuf-ra-s9E">
                                 <rect key="frame" x="75" y="329" width="204" height="243"/>
                                 <animations/>
@@ -89,6 +78,17 @@
                                 <state key="normal" title="Send Location"/>
                                 <connections>
                                     <action selector="sendLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gDj-VN-2v3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKI-P2-i1n">
+                                <rect key="frame" x="8" y="521" width="59" height="51"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="59" id="5dT-hb-eeX"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="camera5.png"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bmk-Qf-hTi"/>
                                 </connections>
                             </button>
                         </subviews>
