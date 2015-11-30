@@ -22,11 +22,22 @@
                                 <rect key="frame" x="-4" y="34" width="383" height="44"/>
                                 <animations/>
                                 <items>
-                                    <navigationItem title="Send My Location" id="aW6-8M-g45"/>
+                                    <navigationItem title="Send My Location" id="aW6-8M-g45">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="iEm-wP-iyM">
+                                            <connections>
+                                                <action selector="takePhoto:" destination="BYZ-38-t0r" id="EE5-jx-W5p"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Send" id="R8H-uI-4lz">
+                                            <connections>
+                                                <action selector="sendMsg:" destination="BYZ-38-t0r" id="ERF-AT-lr8"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a message:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbT-Yo-FKB">
-                                <rect key="frame" x="16" y="206" width="122" height="21"/>
+                                <rect key="frame" x="16" y="200" width="122" height="21"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="fZ9-04-FFR"/>
@@ -35,22 +46,22 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a picture from camera:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkO-GH-vad">
-                                <rect key="frame" x="16" y="305" width="209" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snapshot (optional):" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkO-GH-vad">
+                                <rect key="frame" x="16" y="288" width="155" height="21"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="209" id="oLN-lh-kzg"/>
-                                    <constraint firstAttribute="height" constant="21" id="vr8-Iu-vdM"/>
+                                    <constraint firstAttribute="height" constant="21" id="oXQ-0V-oiS"/>
+                                    <constraint firstAttribute="width" constant="155" id="vUQ-mj-Jwr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(ie: At the concert, in parking lot, etc)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fge-wb-PSx">
-                                <rect key="frame" x="16" y="235" width="343" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(ie: Just got to game!)" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fge-wb-PSx">
+                                <rect key="frame" x="16" y="229" width="343" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipient phone or name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PR3-aZ-HOc">
                                 <rect key="frame" x="16" y="147" width="343" height="30"/>
@@ -68,51 +79,34 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zuf-ra-s9E">
-                                <rect key="frame" x="75" y="329" width="204" height="243"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zuf-ra-s9E">
+                                <rect key="frame" x="12" y="317" width="343" height="340"/>
                                 <animations/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHJ-kB-Sfb">
-                                <rect key="frame" x="138" y="596" width="98" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Send Location"/>
-                                <connections>
-                                    <action selector="sendLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gDj-VN-2v3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKI-P2-i1n">
-                                <rect key="frame" x="8" y="521" width="59" height="51"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="59" id="5dT-hb-eeX"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="camera5.png"/>
-                                <connections>
-                                    <action selector="takePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bmk-Qf-hTi"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="top" secondItem="Qil-TR-Euf" secondAttribute="bottom" constant="8" symbolic="YES" id="2YO-Yf-6H1"/>
+                            <constraint firstItem="pkO-GH-vad" firstAttribute="top" secondItem="Fge-wb-PSx" secondAttribute="bottom" constant="29" id="2a0-Ty-qTw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zuf-ra-s9E" secondAttribute="trailing" constant="4" id="6sG-cq-1aD"/>
                             <constraint firstItem="Qil-TR-Euf" firstAttribute="top" secondItem="hew-ET-BSa" secondAttribute="bottom" constant="40" id="7TQ-M2-cmz"/>
-                            <constraint firstItem="BKI-P2-i1n" firstAttribute="top" secondItem="pkO-GH-vad" secondAttribute="bottom" constant="3" id="9R7-5j-jRn"/>
-                            <constraint firstItem="Fge-wb-PSx" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="C03-Ch-Yuz"/>
-                            <constraint firstItem="Fge-wb-PSx" firstAttribute="top" secondItem="ZbT-Yo-FKB" secondAttribute="bottom" constant="8" symbolic="YES" id="IJR-1o-NRw"/>
-                            <constraint firstItem="ZbT-Yo-FKB" firstAttribute="top" secondItem="PR3-aZ-HOc" secondAttribute="bottom" constant="29" id="LDD-cg-DcA"/>
+                            <constraint firstItem="Fge-wb-PSx" firstAttribute="top" secondItem="ZbT-Yo-FKB" secondAttribute="bottom" constant="8" symbolic="YES" id="B6o-HX-fBf"/>
+                            <constraint firstItem="pkO-GH-vad" firstAttribute="leading" secondItem="Fge-wb-PSx" secondAttribute="leading" id="Jv4-Qf-IwJ"/>
                             <constraint firstItem="hew-ET-BSa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="14" id="LT8-nd-Z41"/>
-                            <constraint firstItem="pkO-GH-vad" firstAttribute="leading" secondItem="BKI-P2-i1n" secondAttribute="leading" id="Pb4-Wg-NNk"/>
-                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="leading" secondItem="ZbT-Yo-FKB" secondAttribute="leading" id="Q1H-bu-r3P"/>
-                            <constraint firstItem="ZbT-Yo-FKB" firstAttribute="leading" secondItem="Fge-wb-PSx" secondAttribute="leading" id="S8C-EW-Pnd"/>
-                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="top" secondItem="Qil-TR-Euf" secondAttribute="bottom" constant="8" symbolic="YES" id="W0S-BI-NQU"/>
-                            <constraint firstItem="pkO-GH-vad" firstAttribute="top" secondItem="Fge-wb-PSx" secondAttribute="bottom" constant="40" id="ZCs-sk-oRf"/>
+                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="N0p-eN-d6a"/>
+                            <constraint firstItem="zuf-ra-s9E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="Ywk-Nr-umh"/>
                             <constraint firstItem="ZbT-Yo-FKB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ZKw-DD-QDg"/>
-                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="centerX" secondItem="hew-ET-BSa" secondAttribute="centerX" id="dsH-eB-6g4"/>
-                            <constraint firstItem="JHJ-kB-Sfb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="4" id="eSi-rl-CMd"/>
+                            <constraint firstItem="ZbT-Yo-FKB" firstAttribute="leading" secondItem="PR3-aZ-HOc" secondAttribute="leading" id="geR-aQ-Qcz"/>
+                            <constraint firstItem="Fge-wb-PSx" firstAttribute="trailing" secondItem="PR3-aZ-HOc" secondAttribute="trailing" id="iZx-2C-7J8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zuf-ra-s9E" secondAttribute="bottom" constant="10" id="j0q-5j-PiH"/>
                             <constraint firstItem="hew-ET-BSa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="klC-2b-g2A"/>
-                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="trailing" secondItem="Fge-wb-PSx" secondAttribute="trailing" id="lqR-GP-zdb"/>
-                            <constraint firstItem="Fge-wb-PSx" firstAttribute="leading" secondItem="pkO-GH-vad" secondAttribute="leading" id="oKI-sL-nig"/>
-                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="leading" secondItem="Qil-TR-Euf" secondAttribute="leading" id="xBy-WY-Hm0"/>
+                            <constraint firstItem="zuf-ra-s9E" firstAttribute="top" secondItem="pkO-GH-vad" secondAttribute="bottom" constant="8" symbolic="YES" id="lOQ-T6-j00"/>
+                            <constraint firstItem="Fge-wb-PSx" firstAttribute="leading" secondItem="ZbT-Yo-FKB" secondAttribute="leading" id="qjy-Wi-4wS"/>
+                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="centerX" secondItem="hew-ET-BSa" secondAttribute="centerX" id="wk0-iS-HY7"/>
+                            <constraint firstItem="ZbT-Yo-FKB" firstAttribute="top" secondItem="PR3-aZ-HOc" secondAttribute="bottom" constant="23" id="x4t-jJ-6E6"/>
+                            <constraint firstItem="PR3-aZ-HOc" firstAttribute="leading" secondItem="Qil-TR-Euf" secondAttribute="leading" id="yLw-Zf-JbK"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -127,7 +121,4 @@
             <point key="canvasLocation" x="444.5" y="434.5"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="camera5.png" width="56" height="51"/>
-    </resources>
 </document>
