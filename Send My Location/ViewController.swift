@@ -15,6 +15,7 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate, 
     
 
     
+    @IBOutlet weak var debugLocation: UITextField!
     @IBOutlet weak var recipientsField: UITextField!
     @IBOutlet weak var messageField: UITextField!
     @IBOutlet weak var sendLocationButton: UIButton!
@@ -23,6 +24,7 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate, 
     var imagePicker:UIImagePickerController!
     let locationManager = CLLocationManager()
     var photo:UIImage!
+    
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,9 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate, 
         locationManager.startUpdatingLocation()
         
         // @@@ check to see if location services is on and a valid location was returned
+        
+        // @@@ also send an msg with instructions on how to enable locaiton services
+        
         
     }
     
@@ -71,7 +76,6 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate, 
     
    
     @IBAction func sendMsg(sender: AnyObject) {
-    
         // Make sure the device can send an SMS
         if (!MFMessageComposeViewController.canSendText()) {
             
@@ -91,15 +95,12 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate, 
             return;
         }
         
-        
-        // Extract the users coordinates
-        let userLocation:CLLocation = locationManager.location!
-        
+
         
         // Construct the message and send
         let messageVC = MFMessageComposeViewController()
         messageVC.recipients = [recipientsField.text!]
-        messageVC.body = messageField.text! + " User is at location " + String(userLocation)
+        messageVC.body = getMessageBody()
         
         
         // Check for image and attach if exist
@@ -115,6 +116,32 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate, 
     
     }
     
+    func getMessageBody () -> String
+    {
+        // Construct the body of the message
+        
+        // Extract the message from the field and strip spaces
+        
+        let userMessage = messageField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        var msgBody = (userMessage == "") ? "" : "Sender's Message: " + userMessage! + "\n"
+        msgBody += "Sender's location: " + getGoogleMapURL()
+        
+        return msgBody
+    }
+    
+    
+    func getGoogleMapURL() -> String
+    {
+        // Extract the users coordinates
+        let userLocation:CLLocation = locationManager.location!
+        
+        let myCoord = String(userLocation.coordinate.latitude) + "," + String(userLocation.coordinate.longitude)
+        
+        let url  = "http://maps.google.com/?q=\(myCoord)"
+        return url
+        
+    }
     
     
     @IBAction func takePhoto(sender: AnyObject) {
@@ -123,8 +150,8 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate, 
         imagePicker.delegate = self
         imagePicker.sourceType = .Camera
         
-        presentViewController(imagePicker, animated: true, completion: nil
-        )
+        presentViewController(imagePicker, animated: true, completion: nil)
+        
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -172,7 +199,7 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate, 
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        //userLocation:CLLocation = locations[0]
+        //print(locations[0])
     
     }
     

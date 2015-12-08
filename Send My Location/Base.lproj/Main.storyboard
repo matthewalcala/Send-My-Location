@@ -61,7 +61,7 @@
                                 <rect key="frame" x="16" y="229" width="343" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipient phone or name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PR3-aZ-HOc">
                                 <rect key="frame" x="16" y="147" width="343" height="30"/>
@@ -80,10 +80,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zuf-ra-s9E">
-                                <rect key="frame" x="12" y="317" width="343" height="340"/>
+                                <rect key="frame" x="12" y="317" width="343" height="275"/>
                                 <animations/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F5z-dp-9Fl">
+                                <rect key="frame" x="12" y="606" width="343" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -93,14 +99,17 @@
                             <constraint firstAttribute="trailingMargin" secondItem="zuf-ra-s9E" secondAttribute="trailing" constant="4" id="6sG-cq-1aD"/>
                             <constraint firstItem="Qil-TR-Euf" firstAttribute="top" secondItem="hew-ET-BSa" secondAttribute="bottom" constant="40" id="7TQ-M2-cmz"/>
                             <constraint firstItem="Fge-wb-PSx" firstAttribute="top" secondItem="ZbT-Yo-FKB" secondAttribute="bottom" constant="8" symbolic="YES" id="B6o-HX-fBf"/>
+                            <constraint firstItem="F5z-dp-9Fl" firstAttribute="top" secondItem="zuf-ra-s9E" secondAttribute="bottom" constant="14" id="He4-Sn-YY0"/>
                             <constraint firstItem="pkO-GH-vad" firstAttribute="leading" secondItem="Fge-wb-PSx" secondAttribute="leading" id="Jv4-Qf-IwJ"/>
                             <constraint firstItem="hew-ET-BSa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="14" id="LT8-nd-Z41"/>
                             <constraint firstItem="PR3-aZ-HOc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="N0p-eN-d6a"/>
                             <constraint firstItem="zuf-ra-s9E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="Ywk-Nr-umh"/>
                             <constraint firstItem="ZbT-Yo-FKB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ZKw-DD-QDg"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="F5z-dp-9Fl" secondAttribute="bottom" constant="31" id="bGM-TI-irz"/>
+                            <constraint firstItem="F5z-dp-9Fl" firstAttribute="leading" secondItem="zuf-ra-s9E" secondAttribute="leading" id="cdQ-l3-X4P"/>
+                            <constraint firstItem="F5z-dp-9Fl" firstAttribute="trailing" secondItem="zuf-ra-s9E" secondAttribute="trailing" id="cmG-PV-Yb0"/>
                             <constraint firstItem="ZbT-Yo-FKB" firstAttribute="leading" secondItem="PR3-aZ-HOc" secondAttribute="leading" id="geR-aQ-Qcz"/>
                             <constraint firstItem="Fge-wb-PSx" firstAttribute="trailing" secondItem="PR3-aZ-HOc" secondAttribute="trailing" id="iZx-2C-7J8"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zuf-ra-s9E" secondAttribute="bottom" constant="10" id="j0q-5j-PiH"/>
                             <constraint firstItem="hew-ET-BSa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="klC-2b-g2A"/>
                             <constraint firstItem="zuf-ra-s9E" firstAttribute="top" secondItem="pkO-GH-vad" secondAttribute="bottom" constant="8" symbolic="YES" id="lOQ-T6-j00"/>
                             <constraint firstItem="Fge-wb-PSx" firstAttribute="leading" secondItem="ZbT-Yo-FKB" secondAttribute="leading" id="qjy-Wi-4wS"/>
@@ -111,6 +120,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="debugLocation" destination="F5z-dp-9Fl" id="rXi-Ru-9os"/>
                         <outlet property="imageView" destination="zuf-ra-s9E" id="6Em-Mu-sBz"/>
                         <outlet property="messageField" destination="Fge-wb-PSx" id="bw4-Qj-TFm"/>
                         <outlet property="recipientsField" destination="PR3-aZ-HOc" id="Srz-ej-iz1"/>
