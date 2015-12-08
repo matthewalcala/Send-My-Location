@@ -18,6 +18,7 @@
 		FA331D8A1C0246BA00DDA2FF /* Send_My_LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA331D891C0246BA00DDA2FF /* Send_My_LocationTests.swift */; };
 		FA331D951C0246BA00DDA2FF /* Send_My_LocationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA331D941C0246BA00DDA2FF /* Send_My_LocationUITests.swift */; };
 		FAB82DED1C0C127A0021CE96 /* camera2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB82DEC1C0C127A0021CE96 /* camera2x.png */; };
+		FAF329821C178AC400438F9B /* testrem.txt in Resources */ = {isa = PBXBuildFile; fileRef = FAF329811C178AC400438F9B /* testrem.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		FA331D941C0246BA00DDA2FF /* Send_My_LocationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Send_My_LocationUITests.swift; sourceTree = "<group>"; };
 		FA331D961C0246BA00DDA2FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAB82DEC1C0C127A0021CE96 /* camera2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera2x.png; sourceTree = "<group>"; };
+		FAF329811C178AC400438F9B /* testrem.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testrem.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				FA331D781C0246BA00DDA2FF /* Send_My_Location.xcdatamodeld */,
 				FA07EBE31C07B523009A7967 /* camera5.png */,
 				FAB82DEC1C0C127A0021CE96 /* camera2x.png */,
+				FAF329811C178AC400438F9B /* testrem.txt */,
 			);
 			path = "Send My Location";
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				FA331D7F1C0246BA00DDA2FF /* LaunchScreen.storyboard in Resources */,
 				FA331D7C1C0246BA00DDA2FF /* Assets.xcassets in Resources */,
 				FA331D771C0246BA00DDA2FF /* Main.storyboard in Resources */,
+				FAF329821C178AC400438F9B /* testrem.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
