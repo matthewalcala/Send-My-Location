@@ -28,7 +28,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
     var recipients = [String:String]()
     //let session = NSURLSession.sharedSession()  // for twilio call
     var imageFileName: String = ""
-    var optionalMessage: String = ""
+   // var optionalMessage: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +70,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
             self.imageView.image = nil
             self.recipientsField.text = ""
             self.messageField.text = ""
-            self.optionalMessage = ""
+          //  self.optionalMessage = ""
             self.photo = nil
             self.imageFileName = ""
             self.recipients.removeAll()
@@ -161,7 +161,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         }
         
         // Load the text part of the message if one was added
-        optionalMessage = messageField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        //optionalMessage = messageField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+       
         if (imageView.image != nil) {
             myImageUploadRequest()
         }
@@ -203,19 +204,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         let twilioSecret = "f793576101d25255c0c879ad546b87bf"
         
         //Note replace + = %2B , for To and From phone number
-        let fromNumber = "%2B19162993100"// actual number is +14803606445
-        let toNumber = "%2B19167928290"// actual number is +919152346132
+        let fromNumber = "%2B19162993100"
+        let toNumber = "%2B19167928290"
         
         if (imageView.image != nil) {
             mediaUrl = "&MediaUrl=http://www.darmilabs.com/sml/engine/appphotos/" + self.imageFileName
         }
 
-        if (optionalMessage != "") {
-            message = "&Body=" + optionalMessage + "\n" + getGoogleMapURL()
-        }
-        else {
-            message = "&Body=" + getGoogleMapURL()
-        }
+        message = "&Body=" + constructMessageText()
         
         // Build the request
         let request = NSMutableURLRequest(URL: NSURL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/Messages")!)
@@ -234,9 +230,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
                 print("Error: \(error)")
                 returnStatus = false
             }
+            
             // change the permissions of the image on darmi labs server so it is secure from outside world
-            self.modifyImagePermissionsOnServer()
-      
+            if (self.imageView.image != nil) {
+                self.modifyImagePermissionsOnServer()
+            }
+            
             self.resetForm()
         }).resume()
         
@@ -245,33 +244,67 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         //return returnStatus
     }
     
-    func getMessageBody () -> String
-    {
-        // Construct the body of the message
+    
+    // Construct the message text. Format is:
+    // (TimeStamp)
+    // Message (optional)
+    // Google location link
+    func constructMessageText() -> String {
         
-        // Extract the message from the field and strip spaces
+        var msgText = ""
+    
+        msgText = getTimeStampText() + "\n"
+        msgText += getOptionalMessageText()
+        msgText += getGoogleMapURLText()
+    
         
-        let userMessage = messageField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        
-        var msgBody = (userMessage == "") ? "" : "Sender's Message: " + userMessage! + "\n"
-        msgBody += "Sender's location: " + getGoogleMapURL()
-        
-        return msgBody
+        return msgText;
     }
     
+
     
-    func getGoogleMapURL() -> String
+    func getOptionalMessageText() -> String {
+        var retText = ""
+        
+        // Load the text part of the message if one was added
+        let optionalMsg = messageField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        if (optionalMsg != "") {
+            retText = "Message from user: " + optionalMsg + "\n"
+        }
+        else {
+               retText = ""
+        }
+
+        return retText
+    }
+    
+    func getGoogleMapURLText() -> String
     {
         // Extract the users coordinates
         let userLocation:CLLocation = locationManager.location!
         
         let myCoord = String(userLocation.coordinate.latitude) + "," + String(userLocation.coordinate.longitude)
         
-        let url  = "http://maps.google.com/?q=\(myCoord)"
+        
+        
+        let url  = "Location of user: http://maps.google.com/?q=\(myCoord)"
+        
         return url
         
     }
     
+    func getTimeStampText() -> String {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        formatter.timeStyle = .ShortStyle
+        
+        let timestamp = "(" + formatter.stringFromDate(NSDate()) + ")"
+        
+        return timestamp
+    }
+    
+
     
     @IBAction func takePhoto(sender: AnyObject) {
         
@@ -458,10 +491,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
             // Print out response body
             let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
             print("responseString = \(responseString)")
-            
-            //Let’s convert response sent from a server side script to a NSDictionary object:
-            
-            //var err: NSError?
             
             do {
                 let myJSON = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? NSDictionary
