@@ -15,12 +15,15 @@ import Contacts
 
 class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, CNContactPickerDelegate  {
     
+    
+    // MARK: Properties
     @IBOutlet weak var debugLocation: UITextField!
     @IBOutlet weak var recipientsField: UITextField!
     @IBOutlet weak var messageField: UITextField!
     @IBOutlet weak var sendLocationButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
+    
     
     var imagePicker:UIImagePickerController!
     let locationManager = CLLocationManager()
@@ -63,6 +66,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         
     }
     
+    // MARK: UITextFieldDelegate
+   
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
+    
     func resetForm () {
         dispatch_async(dispatch_get_main_queue(),{
             self.myActivityIndicator.stopAnimating()
@@ -78,22 +94,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
        
     }
     
-    /**
-     * Called when 'return' key pressed. return NO to ignore.
-     */
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return false
-    }
-    
-    
-    /**
-     * Called when the user click on the view (outside the UITextField).
-     */
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
+  
+    // MARK: Actions
+
     @IBAction func showContactsPicker(sender: AnyObject) {
    
         let contactPicker = CNContactPickerViewController()
@@ -102,6 +105,76 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         
         self.presentViewController(contactPicker, animated: true, completion: nil)
     }
+    
+    
+    @IBAction func sendMsgPressed(sender: AnyObject) {
+        
+        // @@@ add error handling and also manipulate activity indicator
+        
+        
+        var recipientPhoneNumbers:String = ""
+        
+        
+        // Make sure a recipient was selected
+        //recipientsField.text = recipientsField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if (recipients.count == 0) {
+            
+            // need to alert user of error
+            displayAlertMessage("Recipient is required", msgDesc: "Please enter a valid recipient's phone number or select a contact.", offerEmail: false)
+            
+            return;
+        }
+            // Create the list of phone numbers for the message
+        else {
+            for (_, phoneNumber) in recipients {
+                recipientPhoneNumbers += (recipientPhoneNumbers == "") ? phoneNumber : ", " + phoneNumber
+            }
+        }
+        
+        // Load the text part of the message if one was added
+        //optionalMessage = messageField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        if (imageView.image != nil) {
+            myImageUploadRequest()
+        }
+        else {
+            
+            sendSMS()
+            
+            // @@@ need to capture an error an notify user if message was sent or not
+            
+            /*{
+            // message has been sent
+            // this would be cooler if we had a graphic
+            print("Message was sent!")
+            
+            
+            //   displayAlertMessage("Message Sent!", msgDesc: "Your message was sent successfully!", offerEmail: false)
+            }
+            else
+            {
+            //  displayAlertMessage("Message not sent", msgDesc: "There was an unknown error sending your message. Please try again or report this error to us.", offerEmail: false)
+            }
+            
+            }
+            */
+        }
+        
+    }
+
+    @IBAction func takePhoto(sender: AnyObject) {
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .Camera
+        
+        presentViewController(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
     
     func contactPicker(picker: CNContactPickerViewController, didSelectContactProperty contactProperty: CNContactProperty) {
         let contact = contactProperty.contact
@@ -135,61 +208,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
 
     }
 
-   
-    @IBAction func sendMsgPressed(sender: AnyObject) {
-        
-        // @@@ add error handling and also manipulate activity indicator
-            
-        
-        var recipientPhoneNumbers:String = ""
-    
-        
-        // Make sure a recipient was selected
-        //recipientsField.text = recipientsField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        if (recipients.count == 0) {
-            
-            // need to alert user of error
-            displayAlertMessage("Recipient is required", msgDesc: "Please enter a valid recipient's phone number or select a contact.", offerEmail: false)
-            
-            return;
-        }
-            // Create the list of phone numbers for the message
-        else {
-            for (_, phoneNumber) in recipients {
-                recipientPhoneNumbers += (recipientPhoneNumbers == "") ? phoneNumber : ", " + phoneNumber
-            }
-        }
-        
-        // Load the text part of the message if one was added
-        //optionalMessage = messageField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-       
-        if (imageView.image != nil) {
-            myImageUploadRequest()
-        }
-        else {
-        
-            sendSMS()
-            
-            // @@@ need to capture an error an notify user if message was sent or not
-            
-            /*{
-            // message has been sent
-            // this would be cooler if we had a graphic
-            print("Message was sent!")
-            
-            
-            //   displayAlertMessage("Message Sent!", msgDesc: "Your message was sent successfully!", offerEmail: false)
-            }
-            else
-            {
-            //  displayAlertMessage("Message not sent", msgDesc: "There was an unknown error sending your message. Please try again or report this error to us.", offerEmail: false)
-            }
-            
-            }
-            */
-        }
-        
-    }
     
     func sendSMS() //-> Bool
     {
@@ -306,15 +324,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
     
 
     
-    @IBAction func takePhoto(sender: AnyObject) {
-        
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .Camera
-        
-        presentViewController(imagePicker, animated: true, completion: nil)
-        
-    }
+    
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
@@ -515,7 +525,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
     
 }
 
-
+// MARK: Extenstions
 
 extension NSMutableData {
     
