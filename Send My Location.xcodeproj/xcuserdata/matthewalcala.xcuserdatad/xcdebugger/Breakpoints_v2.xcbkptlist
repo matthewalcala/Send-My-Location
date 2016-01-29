@@ -10,13 +10,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Send My Location/ViewController.swift"
-            timestampString = "471297057.882099"
+            timestampString = "474421711.590116"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "sendSMS()"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Send My Location/ViewController.swift"
+            timestampString = "474421711.590116"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "sendSMS()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Send_My_Location.ViewController.sendSMS (Send_My_Location.ViewController)() -&gt; ()"
+                  moduleName = "Send My Location"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthewalcala/Development/Projects/Send%20My%20Location/Send%20My%20Location/ViewController.swift"
+                  timestampString = "474421326.319677"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "279"
+                  endingLineNumber = "279"
+                  offsetFromSymbolStart = "2132">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Send_My_Location.ViewController.(sendSMS (Send_My_Location.ViewController) -&gt; () -&gt; ()).(closure #1)"
+                  moduleName = "Send My Location"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthewalcala/Development/Projects/Send%20My%20Location/Send%20My%20Location/ViewController.swift"
+                  timestampString = "474421326.319833"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "279"
+                  endingLineNumber = "279"
+                  offsetFromSymbolStart = "1344">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,28 +74,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Send My Location/ViewController.swift"
-            timestampString = "471293839.278068"
+            timestampString = "474421711.590116"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "sendSMS()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Send My Location/ViewController.swift"
-            timestampString = "471297057.882099"
+            timestampString = "474415822.190263"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "sendMsg(_:)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "resetForm()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Send_My_Location.ViewController.resetForm (Send_My_Location.ViewController)() -&gt; ()"
+                  moduleName = "Send My Location"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthewalcala/Development/Projects/Send%20My%20Location/Send%20My%20Location/ViewController.swift"
+                  timestampString = "474421326.346755"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Send_My_Location.ViewController.(resetForm (Send_My_Location.ViewController) -&gt; () -&gt; ()).(closure #1)"
+                  moduleName = "Send My Location"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthewalcala/Development/Projects/Send%20My%20Location/Send%20My%20Location/ViewController.swift"
+                  timestampString = "474421326.346879"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Send My Location/ViewController.swift"
+            timestampString = "474421711.590116"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "sendSMS()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Send My Location/ViewController.swift"
+            timestampString = "474421711.590116"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
+            landmarkName = "myImageUploadRequest()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Send My Location/ViewController.swift"
+            timestampString = "474421711.590116"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "sendSMS()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
