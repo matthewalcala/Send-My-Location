@@ -16,7 +16,7 @@ import Contacts
 class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, CNContactPickerDelegate  {
     
     
-    // MARK: Properties
+    // MARK: Properties - Outlets
     @IBOutlet weak var debugLocation: UITextField!
     @IBOutlet weak var recipientsField: UITextField!
     @IBOutlet weak var messageField: UITextField!
@@ -25,19 +25,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
     
     
+    // MARK: Properties - User
     var imagePicker:UIImagePickerController!
     let locationManager = CLLocationManager()
     var photo:UIImage!
     var recipients = [String:String]()
     //let session = NSURLSession.sharedSession()  // for twilio call
     var imageFileName: String = ""
-   // var optionalMessage: String = ""
+    var hasPhoto = false
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imageFileName = ""
-              
+        hasPhoto = false
+        
         recipientsField.delegate = self
         messageField.delegate = self
         
@@ -77,26 +81,48 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         self.view.endEditing(true)
     }
     
-    
-    
     func resetForm () {
+       
+        
         dispatch_async(dispatch_get_main_queue(),{
             self.myActivityIndicator.stopAnimating()
+            
             self.photo = nil
             self.imageView.image = nil
             self.recipientsField.text = ""
             self.messageField.text = ""
-          //  self.optionalMessage = ""
             self.photo = nil
             self.imageFileName = ""
             self.recipients.removeAll()
+            self.hasPhoto = false
         });
        
     }
     
   
     // MARK: Actions
-
+    @IBAction func photoImageViewTapped(sender: UITapGestureRecognizer) {
+  
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .Camera
+        
+        presentViewController(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        
+        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        photo = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        hasPhoto = true
+        
+        print ("photo was taken successfully")
+    }
+    
     @IBAction func showContactsPicker(sender: AnyObject) {
    
         let contactPicker = CNContactPickerViewController()
@@ -112,9 +138,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         // @@@ add error handling and also manipulate activity indicator
         
         
-        var recipientPhoneNumbers:String = ""
-        
-        
         // Make sure a recipient was selected
         //recipientsField.text = recipientsField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         if (recipients.count == 0) {
@@ -123,12 +146,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
             displayAlertMessage("Recipient is required", msgDesc: "Please enter a valid recipient's phone number or select a contact.", offerEmail: false)
             
             return;
-        }
-            // Create the list of phone numbers for the message
-        else {
-            for (_, phoneNumber) in recipients {
-                recipientPhoneNumbers += (recipientPhoneNumbers == "") ? phoneNumber : ", " + phoneNumber
-            }
         }
         
         // Load the text part of the message if one was added
@@ -161,20 +178,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         }
         
     }
-
-    @IBAction func takePhoto(sender: AnyObject) {
-        
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .Camera
-        
-        presentViewController(imagePicker, animated: true, completion: nil)
-        
-    }
     
     
-    
-    
+    // MARK: User Methods
     
     func contactPicker(picker: CNContactPickerViewController, didSelectContactProperty contactProperty: CNContactProperty) {
         let contact = contactProperty.contact
@@ -213,6 +219,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
     {
         var mediaUrl : String = ""
         var message : String = ""
+
         
         //Sender ID = AC5cdj7g8d56gs7c4f1721cdc
         //token secret = f1452eijsk748eydhu284cd1062649ff8c7
@@ -221,11 +228,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         let twilioSID = "ACa08504aba0c17df9fee4b6a653b86792"
         let twilioSecret = "f793576101d25255c0c879ad546b87bf"
         
-        //Note replace + = %2B , for To and From phone number
         let fromNumber = "%2B19162993100"
-        let toNumber = "%2B19167928290"
-        
-        if (imageView.image != nil) {
+        let toNumber = getToAddress()
+
+
+        if (hasPhoto) {
             mediaUrl = "&MediaUrl=http://www.darmilabs.com/sml/engine/appphotos/" + self.imageFileName
         }
 
@@ -243,25 +250,53 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
                 // Success
                 print("Response: \(responseDetails)")
                 returnStatus = true
+            
+                self.displayAlertMessage("Message Sent", msgDesc: "Your location has been sent successfully!", offerEmail: false)
+                self.myActivityIndicator.stopAnimating()
+                
             } else {
                 // Failure
                 print("Error: \(error)")
                 returnStatus = false
             }
             
+            // @@@ create alert
+            
+  //          self.myActivityIndicator.stopAnimating()
+            
             // change the permissions of the image on darmi labs server so it is secure from outside world
-            if (self.imageView.image != nil) {
+            if (self.hasPhoto) {
                 self.modifyImagePermissionsOnServer()
             }
             
             self.resetForm()
+            
+  
+            
         }).resume()
         
-        self.myActivityIndicator.stopAnimating()
+       
         
         //return returnStatus
     }
     
+    
+    func getToAddress() -> String {
+       
+        var recipientPhoneNumbers = ""
+        
+        // Create the list of phone numbers for the message
+        for (_, phoneNumber) in recipients {
+            recipientPhoneNumbers += (recipientPhoneNumbers == "") ? phoneNumber : ", " + phoneNumber
+        }
+        recipientPhoneNumbers = recipientPhoneNumbers.stringByReplacingOccurrencesOfString("(", withString: "")
+        recipientPhoneNumbers = recipientPhoneNumbers.stringByReplacingOccurrencesOfString(")", withString: "")
+        recipientPhoneNumbers = recipientPhoneNumbers.stringByReplacingOccurrencesOfString("-", withString: "")
+        recipientPhoneNumbers = recipientPhoneNumbers.stringByReplacingOccurrencesOfString(" ", withString: "")
+
+        return recipientPhoneNumbers
+        
+    }
     
     // Construct the message text. Format is:
     // (TimeStamp)
@@ -322,19 +357,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         return timestamp
     }
     
-
-    
-    
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        
-        imagePicker.dismissViewControllerAnimated(true, completion: nil)
-        
-        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        photo = info[UIImagePickerControllerOriginalImage] as? UIImage
-        print ("photo was taken successfully")
-    }
-    
     func formatPhoto (photo: UIImage) {
         // Define a new image object
         // resize here @@@
@@ -347,26 +369,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
     
     }
 
-    func displayAlertMessage(msgTitle: String, msgDesc: String, offerEmail: Bool) {
-       
-        // need to alert user of error
-        let alert = UIAlertController(title: msgTitle, message: msgDesc, preferredStyle: UIAlertControllerStyle.Alert)
-        let email = UIAlertAction(title: "Report Error...", style: UIAlertActionStyle.Default) { (action: UIAlertAction) -> Void in
-            // Do something when email is tapped
-        }
-        let cancel = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
-        
-        if offerEmail {
-            alert.addAction(email)
-        }
-        
-        alert.addAction(cancel)
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
-    
-    
     func myImageUploadRequest()
     {
     
@@ -394,10 +396,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         request.HTTPBody = createBodyWithParameters(param, filePathKey: "file", imageDataKey: imageData!, boundary: boundary)
         
         
-        myActivityIndicator.startAnimating();
+        
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
+            
+            self.myActivityIndicator.startAnimating()
             
             if error != nil {
                 print("error=\(error)")
@@ -428,7 +432,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
             
             // now that the picture is uploaded, we can call twilio to send message
             self.sendSMS()
-            
+            self.myActivityIndicator.stopAnimating()
         }
         
         task.resume()
@@ -522,6 +526,29 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UINavigation
         
         task.resume()
     }
+    
+    // MARK: Alert Messages
+    func displayAlertMessage(msgTitle: String, msgDesc: String, offerEmail: Bool) {
+        
+        // need to alert user of error
+        let alert = UIAlertController(title: msgTitle, message: msgDesc, preferredStyle: UIAlertControllerStyle.Alert)
+        let email = UIAlertAction(title: "Report Error...", style: UIAlertActionStyle.Default) { (action: UIAlertAction) -> Void in
+            // Do something when email is tapped
+        }
+        
+        let cancel = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(cancel)
+        
+        
+        if offerEmail {
+            alert.addAction(email)
+        }
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    
     
 }
 
